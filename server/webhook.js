@@ -10,14 +10,11 @@ app.use(bodyParser.json());
 
 app.post("/webhook", async (req, res) => {
     const { body } = req;
-
     // Extract email from the sessionInfo parameters
     const email = body.sessionInfo.parameters.email;
-
     if (!email) {
         return res.status(400).json({ error: "Email not found in request" });
     }
-
     try {
         // Insert email into the database
         await pool.query('INSERT INTO email (email) VALUES ($1)', [email]);
@@ -33,11 +30,10 @@ app.post("/webhook", async (req, res) => {
                 ],
             },
         };
-
         return res.status(200).json(jsonResponse);
     } catch (error) {
         console.error("Error saving email to database:", error);
-        console.log("Email value:", email); // Add this line to log the email value
+        console.log("Email value:", email); 
         return res.status(500).json({ error: "Error saving email to database" });
     }
 });
