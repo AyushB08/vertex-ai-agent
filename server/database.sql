@@ -1,0 +1,7 @@
+CREATE DATABASE emails;
+
+CREATE TABLE email (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(100) UNIQUE NOT NULL,
+   
+);
