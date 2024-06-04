@@ -18,7 +18,6 @@ app.post("/webhook", async (req, res) => {
     try {
         // Insert email into the database
         await pool.query('INSERT INTO email (email) VALUES ($1)', [email]);
-
         const jsonResponse = {
             fulfillmentResponse: {
                 messages: [
@@ -37,7 +36,6 @@ app.post("/webhook", async (req, res) => {
         return res.status(500).json({ error: "Error saving email to database" });
     }
 });
-
 app.listen(6001, () => {
     console.log("Server is running on port 6001");
 });
